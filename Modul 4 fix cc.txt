@@ -1,0 +1,201 @@
+#include <iostream>
+#include <conio.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+using namespace std;
+
+struct perpus{
+	int kodebk;
+	string nmbk;
+	string nama;
+	string alamat;
+
+
+	
+}data[100],temp;
+
+int data1=0,i,cari,j;
+char ya;
+bool ketemu;
+int quick(int bawah, int atas)
+{
+
+int pivot;
+
+		if (bawah<atas){
+		i = bawah;
+		j = atas;
+		pivot = data[j].kodebk;
+	do{
+		while (i<j &&data[i].kodebk<=pivot){
+		i++;
+		}
+		while (j>i && data[j].kodebk>=pivot){
+		j--;
+		}
+		if (i<j){
+
+  		temp=data[i];
+  		data[i]=data[j];
+  		data[j]=temp;
+}
+}while (i<j);
+
+
+temp =data[j];
+data[j] = data[atas];
+data[atas] = temp;
+if (j-bawah<atas-i)
+{
+quick(bawah,j-1);
+quick(i+1,atas);
+}
+else
+{
+quick(i+1,atas);
+quick(bawah,j-1);
+}
+}
+}
+int main(){
+	
+	int pil,bts;
+	cout<<"(WARNING MAX TEMPAT 100)"<<endl;
+	cout<<"ßßßßßßßßßßßßßßßßßßßßßßßß"<<endl;
+	cout<<"Masukan batas tempat penggunaan data :";
+	cin>>bts;
+	
+	do{
+		system("cls");
+
+		cout<<"ßßßßßßßßßßßßßßßßßßßß"<<endl;
+		cout<<"1.insert\n2.view\n3.delete\n4.mencari data\n5.sorting\npilih :";
+		cin>>pil;
+		switch(pil){
+			case 1:
+				if(data1<1&&data1<bts){
+					i=0;
+				}else{
+					i=data1;
+				}
+				if(data1<bts){
+					do{
+						cout<<"ßßßßßßßßßßßßßßßßßßßß"<<endl;
+						cout<<"kode buku         :";
+						cin>>data[i].kodebk;
+						cout<<"Masukan Nama buku   :";
+						cin>>data[i].nmbk;
+						cout<<"Masukan Nama anda   :";
+						cin>>data[i].nama;
+						cout<<"Masukan alamat anda :";
+						cin>>data[i].alamat;
+						i++;
+						cout<<"\n";
+						if(i==bts){
+							i++;
+						}else{
+							cout<<"Ingin input data lagi y/n :";
+							ya=_getch();
+							cout<<"\n";
+						}
+						data1++;
+					}while(i<bts&&ya=='y');
+				}else{
+					cout<<"ruang batas penuh";
+				}
+				break;
+				case 2:
+					system("cls");
+					if(data1<1){
+						
+						cout<<"data koosong"<<endl;
+					}else{
+						
+					for(int y=0;y<data1;y++){
+					
+							cout<<"ßßßßßßßßßßßßßßßßßßßß"<<endl;
+							cout<<"kode buku   :"<<data[y].kodebk<<endl;
+							cout<<"Nama buku   :"<<data[y].nmbk<<endl;
+							cout<<"Nama        :"<<data[y].nama<<endl;
+							cout<<"Alamat      :"<<data[y].alamat<<endl;
+						
+						}
+					}
+					system("pause");
+					break;
+					
+					case 3:
+					if(data1<1){
+					cout<<"data koong";
+				}else{
+						i=0;
+						while(i<data1){
+							cout<<"ßßßßßßßßßßßßßßßßßßßß"<<endl;
+							cout<<"kode buku   :"<<data[i].kodebk<<endl;
+							cout<<"Nama buku   :"<<data[i].nmbk<<endl;
+							cout<<"Nama        :"<<data[i].nama<<endl;
+							cout<<"Alamat      :"<<data[i].alamat<<endl;
+							i++;
+						}
+						cout<<"kode Buku :";
+			    	 	cin>>cari;
+			    	 for(i=0;i<=data1;i++){
+			    	 	if(cari==data[i].kodebk){
+			    	 		ketemu=true;
+			    	 		if(ketemu){
+    				for(j=i;j<=data1+1;j++){
+    					data[j]=data[j+1];
+					}
+     				cout<<"Data yang anda cari di hapus"<<endl;
+					data1--;
+    				}
+   				}
+  			}	
+  			
+  			system("pause");
+		}
+		break;
+					case 4:
+						if(data1<1){
+							cout<<"data koong";
+						}else{
+				
+					cout<<"Kode Buku :"<<endl;
+					cin>>cari;
+					
+				for(i=0;i<=data1;i++){
+					if(cari==data[i].kodebk){
+						ketemu=true;
+					if(ketemu){
+    						cout<<"data ketemu "<<endl;
+    						cout<<"ßßßßßßßßßßßßßßßßßßßß"<<endl;
+							cout<<"kode buku   :"<<data[i].kodebk<<endl;
+							cout<<"Nama buku   :"<<data[i].nmbk<<endl;
+							cout<<"Nama        :"<<data[i].nama<<endl;
+							cout<<"Alamat      :"<<data[i].alamat<<endl;
+     				}
+     				
+			 		
+     			}
+			}
+			
+		
+		}
+		
+		system("pause");
+		break;
+				case 5:
+				
+						quick(0,data1-1);
+		
+			   cout<<"Data sudah tersorting"<<endl;
+					
+					
+					break;
+					system("pause");
+		
+	}
+		
+	}while(pil<6);
+}
